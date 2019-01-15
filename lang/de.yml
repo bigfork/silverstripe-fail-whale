@@ -1,0 +1,38 @@
+de:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: Fehlercode
+    CODE_400: '400 - Ungültige Anforderung'
+    CODE_401: '401 - Nicht autorisiert'
+    CODE_403: '403 - Verboten'
+    CODE_404: '404 - Nicht gefunden'
+    CODE_405: '405 - Methode nicht erlaubt'
+    CODE_406: '406 - Inakzeptabel'
+    CODE_407: '407 - Proxy-Authentifizierung erforderlich'
+    CODE_408: '408 - Zeitüberschreitung der Anforderung'
+    CODE_409: '409 - Konflikt'
+    CODE_410: '410 - nicht mehr existent'
+    CODE_411: '411 - Länge erforderlich'
+    CODE_412: '412 - Voraussetzung fehlgeschlagen'
+    CODE_413: '413 - Angeforderter Wert zu groß'
+    CODE_414: '414 - Angeforderte URI zu lang'
+    CODE_415: '415 - Nicht unterstützter Medientyp'
+    CODE_416: '416 - Anfragebereich nicht erfüllbar'
+    CODE_417: '417 - Erwartung fehlgeschlagen'
+    CODE_422: '422 - Verarbeitung abgelehnt'
+    CODE_429: '429 - Zu viele Anforderungen'
+    CODE_500: '500 - Interner Serverfehler'
+    CODE_501: '501 - Nicht implementiert'
+    CODE_502: '502 - Fehlerhafter Gateway'
+    CODE_503: '503 - Dienst nicht erreichbar'
+    CODE_504: '504 - Zeitüberschreitung am Gateway'
+    CODE_505: '505 - HTTP-Version wird nicht unterstützt'
+    DEFAULTERRORPAGECONTENT: '<p>Entschuldigung, möglicherweise versuchen Sie eine Seite zu erreichen die nicht existiert.</p><p>Bitte überprüfen Sie die Schreibweise der URL die Sie versucht haben zu erreichen und versuchen Sie es noch einmal.</p>'
+    DEFAULTERRORPAGETITLE: 'Seite nicht gefunden'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Entschuldigung, bei der Bearbeitung ihrer Anfrage ist ein Problem aufgetreten.</p>'
+    DEFAULTSERVERERRORPAGETITLE: Serverfehler
+    DESCRIPTION: 'Spezieller Inhalt für andere Fehlerfälle (z.B. "Seite nicht gefunden")'
+    PLURALNAME: Fehlerseiten
+    PLURALS:
+      one: 'Eine Fehlerseite'
+      other: '{count} Fehlerseiten'
+    SINGULARNAME: Fehlerseite

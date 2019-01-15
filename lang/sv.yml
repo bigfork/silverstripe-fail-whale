@@ -1,0 +1,26 @@
+sv:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: Felkod
+    CODE_400: '400 - Ogiltig begäran'
+    CODE_401: '401 - Ej auktoriserad'
+    CODE_403: '403 - Förbjuden'
+    CODE_404: '404 - Hittades inte'
+    CODE_405: '405 - Metoden tillåts ej'
+    CODE_407: '407 - Proxy-autenticering krävs'
+    CODE_409: '409 - Konflikt'
+    CODE_411: '411 - Längd krävs'
+    CODE_415: '415 - Mediatypen stöds ej'
+    CODE_500: '500 - Internt serverfel'
+    CODE_501: '501 - Ej implementerad'
+    CODE_502: '502 - Felaktig gateway'
+    CODE_505: '505 - HTTP-versionen stöds ej'
+    DEFAULTERRORPAGECONTENT: '<p>Tyvärr, det verkar som om du försökte komma åt en sida som inte existerar.</p><p> Kontrollera stavningen av webbadressen du försökte komma åt och försök igen.</p>'
+    DEFAULTERRORPAGETITLE: 'Sidan hittades inte'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Tyvärr, det var ett problem att hantera din förfrågan.</p>'
+    DEFAULTSERVERERRORPAGETITLE: Serverfel
+    DESCRIPTION: 'Anpassat innehåll för olika fel (t. ex "Sidan hittades inte")'
+    PLURALNAME: Felsidor
+    PLURALS:
+      one: 'En felsida'
+      other: '{count} felsidor'
+    SINGULARNAME: Felsida

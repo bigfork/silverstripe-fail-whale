@@ -1,0 +1,8 @@
+---
+Name: silverstripe-fail-whale-logging
+After:
+  - '#loggingformatters'
+---
+SilverStripe\Core\Injector\Injector:
+  Monolog\Formatter\FormatterInterface.friendly:
+    class: Bigfork\SilverStripeFailWhale\Logging\ErrorDocumentErrorFormatter

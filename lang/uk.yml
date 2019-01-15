@@ -1,0 +1,7 @@
+uk:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'Код помилки'
+    DEFAULTERRORPAGECONTENT: '<p>Вибачте, але такої сторінки не існує.</p><p>Перевірте, будь-ласка, правильність URL та спробуйте ще раз.</p>'
+    DEFAULTERRORPAGETITLE: 'Сторінку не знайдено'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Вибачте, під час опрацювання вашого запиту сталася помилка.</p>'
+    DEFAULTSERVERERRORPAGETITLE: 'Помилка сервера'

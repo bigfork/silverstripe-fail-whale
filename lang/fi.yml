@@ -1,0 +1,20 @@
+fi:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: Virhekoodi
+    CODE_404: '404 - Sivua ei löytynyt'
+    CODE_408: '408 - Pyyntö aikakatkaistiin'
+    CODE_409: '409 - Ristiriita'
+    CODE_411: '411 - Vaaditaan pituus'
+    CODE_429: '429 - Liian monta pyyntöä'
+    CODE_500: '500 - Sisäinen palvelinvirhe'
+    CODE_503: '503 - Palvelu ei saatavissa'
+    DEFAULTERRORPAGECONTENT: '<p>Pahoittelut, ilmeisesti yritit sivulle, jota ei ole.</p><p>Ole hyvä ja tarkista kirjoitusasu URL-osoitteesta ja yritä uudelleen.</p>'
+    DEFAULTERRORPAGETITLE: 'Sivua ei löytynyt'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Pahoittelut, pyyntösi aiheutti virheen.</p>'
+    DEFAULTSERVERERRORPAGETITLE: Palvelinvirhe
+    DESCRIPTION: 'Oma sisältö eri virhetilanteita varten (esim. "Sivua ei löytynyt")'
+    PLURALNAME: Virhesivut
+    PLURALS:
+      one: Virhesivu
+      other: '{count} Virhesivua'
+    SINGULARNAME: Virhesivu

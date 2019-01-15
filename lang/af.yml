@@ -1,0 +1,6 @@
+af:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE_501: '501 - Nie Geimplementeer'
+    CODE_502: '502 - Slegte Deurgang'
+    CODE_503: '503 - Diens Nie Beskikbaar'
+    CODE_505: '505 - HTTP Weergawe Nie Ondersteun'

@@ -1,0 +1,5 @@
+is:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'Villu númer'
+    DEFAULTERRORPAGECONTENT: '<p>Afsakið, það virðist vera að þú ert að reyna opna síðu sem er ekki til.</p><p>Vinsamlegast athugaðu hvort að slóðin sé rétt skrifuð og prófaðu aftur</p>'
+    DEFAULTERRORPAGETITLE: 'Síða fannst ekki'

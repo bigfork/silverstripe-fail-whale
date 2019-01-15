@@ -1,0 +1,9 @@
+sl:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'Napačna koda'
+    DEFAULTERRORPAGECONTENT: '<p>Morda ste zahtevali dostop do strani, ki ne obstaja?</p><p>Za vsak slučaj preverite vpisani URL-naslov in poskusite ponovno.</p>'
+    DEFAULTERRORPAGETITLE: 'Strani ni mogoče najti'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Oprostite, pri vaši zahtevi je prišlo do težave.</p>'
+    DEFAULTSERVERERRORPAGETITLE: 'Napaka na strežniku'
+    PLURALNAME: 'Strani z napakami'
+    SINGULARNAME: 'Stran z napako'

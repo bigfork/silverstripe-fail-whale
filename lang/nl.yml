@@ -1,0 +1,38 @@
+nl:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: Foutcode
+    CODE_400: '400 - Foute aanvraag'
+    CODE_401: '401 - Niet geautorizeerd'
+    CODE_403: '403 - Toegang verboden'
+    CODE_404: '404 - Niet gevonden'
+    CODE_405: '405 - Methode niet toegestaan'
+    CODE_406: '406 - Niet geaccepteerd'
+    CODE_407: '407 - Proxy auhenticatie vereis'
+    CODE_408: '408 - Aanvraag verlopen'
+    CODE_409: '409 - Conflict'
+    CODE_410: '410 - Verdwenen'
+    CODE_411: '411 - Lengte vereist'
+    CODE_412: '412 - Niet voldaan aan vooraf gestelde voorwaarde'
+    CODE_413: '413 - Aanvraag te groot'
+    CODE_414: '414 - Aanvraag URI te lang'
+    CODE_415: '415 - Media-type niet ondersteund'
+    CODE_416: '416 - Aangevraagd gedeelte niet opvraagbaar'
+    CODE_417: '417 - Niet voldaan aan verwachting'
+    CODE_422: '422 - Aanvraag kan niet verwerkt worden'
+    CODE_429: '429 - Te veel aanvragen'
+    CODE_500: '500 - Interne serverfout'
+    CODE_501: '501 - Niet geïmplementeerd'
+    CODE_502: '502 - Verkeerde Gateway'
+    CODE_503: '503 - Service niet beschikbaar'
+    CODE_504: '504 - Gateway Timeout'
+    CODE_505: '505 - HTTP versie niet ondersteund'
+    DEFAULTERRORPAGECONTENT: '<p>Helaas, de pagina die u zocht lijkt niet (meer) te bestaan.</p><p>Controleer of de juiste URL is gebruikt en probeer het opnieuw.</p>'
+    DEFAULTERRORPAGETITLE: 'Pagina niet gevonden'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Helaas, er was een probleem bij het verwerken van uw verzoek.</p>'
+    DEFAULTSERVERERRORPAGETITLE: Serverfout
+    DESCRIPTION: 'Aangepaste tekst voor verschillende foutmeldingen (bijv. "Pagina niet gevonden")'
+    PLURALNAME: 'Foutpagina''s'
+    PLURALS:
+      one: 'Een foutpagina'
+      other: '{count} Foutpagina''s'
+    SINGULARNAME: Foutpagina

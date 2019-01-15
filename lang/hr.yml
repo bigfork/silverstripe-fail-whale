@@ -1,0 +1,8 @@
+hr:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'Kod greške'
+    DEFAULTERRORPAGECONTENT: '<p>Nažalost, čini se kako pokušavate pristupiti stranici koja ne postoji</p>Molimo provjerite da li ste ispravno napisali link kojem želite pristupiti i pokušajte ponovo.<p>'
+    DEFAULTERRORPAGETITLE: 'Stranica nije pronađena'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Nažalost, dogodio se problem s vašim zahtjevom.</p>'
+    DEFAULTSERVERERRORPAGETITLE: 'Serverska greška'
+    DESCRIPTION: 'Prilagođeni sadržaj za različite slučajeve pogrešaka (npr., "Stranica nije pronađena")'

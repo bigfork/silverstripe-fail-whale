@@ -1,0 +1,9 @@
+fa_IR:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'کد خطا'
+    DEFAULTERRORPAGECONTENT: '<p>متاسفانه، به‌نظر می‌رسد شما در تلاش برای دستیابی به صفحه‌ای هستید که وجود ندارد.</p><p>لطفاً نشانی اینترنتی را از جهت وجود خطای نگارشی بررسی و مجدداً تلاش نمایید.</p>'
+    DEFAULTERRORPAGETITLE: 'برگ پیدا نشد'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>با پوزش، در پردازش درخواست شما ایرادی بوجود آمد.</p>'
+    DEFAULTSERVERERRORPAGETITLE: 'خطای سرور'
+    PLURALNAME: 'صفحات خطا'
+    SINGULARNAME: 'صفحه‌ی خطا'

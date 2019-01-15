@@ -1,0 +1,4 @@
+en_GB:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE_401: '401 - Unauthorised'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Sorry, there was a problem handling your request.</p>'

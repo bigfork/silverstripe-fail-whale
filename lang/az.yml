@@ -1,0 +1,6 @@
+az:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'Səhv kodu'
+    CODE_501: '501 - Implementasiya olunmayıb'
+    DEFAULTERRORPAGECONTENT: '<P> Üzr istəyirik, görünür siz mövcud olan səhifəyə giriş əldə etməyə cəhd edirdiniz. </p><p>Xahiş sizin giriş əldə etməyə və bir daha sınaqdan keçirməyə cəhd etdiyiniz URL-i yoxlayasınız </p>'
+    DEFAULTERRORPAGETITLE: 'Səhifə tapılmadı'

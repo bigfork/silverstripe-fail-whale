@@ -1,0 +1,7 @@
+gl_ES:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'Código de erro'
+    DEFAULTERRORPAGECONTENT: '<p>Sintoo, parece que estabas tratando de acceder a unha página que non existe.</p><p>Por favor, comproba o enderezo da URL que estaba tratando de acceder e volva tentalo.</p>'
+    DEFAULTERRORPAGETITLE: 'Páxina non atopada'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Sintoo, houbo un problema coa xestión da túa petición.</p>'
+    DEFAULTSERVERERRORPAGETITLE: 'Erro Servidor'

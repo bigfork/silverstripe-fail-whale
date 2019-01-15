@@ -1,0 +1,4 @@
+ast:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    DEFAULTERRORPAGETITLE: 'Páxina non alcontrada'
+    DEFAULTSERVERERRORPAGETITLE: 'Error del servidor'

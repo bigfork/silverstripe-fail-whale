@@ -1,0 +1,10 @@
+sk:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'Chybový kód'
+    DEFAULTERRORPAGECONTENT: '<p>Prepáčte, vyzerá to tak, že sa snažíte otvoriť stránku, ktorá neexistuje.</p><p> Skontrolujte napísanú URL, prosím.</p>'
+    DEFAULTERRORPAGETITLE: 'Stránka nenájdená'
+    DEFAULTSERVERERRORPAGECONTENT: '<p>Prepáčte, nastal problém s manipuláciou vašej požiadavky.</p>'
+    DEFAULTSERVERERRORPAGETITLE: 'Chyba servera'
+    DESCRIPTION: 'Vlastný obsah pre rôzne prípady chýb (napr. "Stránka nenájdená")'
+    PLURALNAME: 'Chybové stránky'
+    SINGULARNAME: 'Chybová stránka'

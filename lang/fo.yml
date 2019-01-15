@@ -1,0 +1,6 @@
+fo:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: Feilkota
+    CODE_404: '404 - Ikki funnin'
+    CODE_411: '411 - Longd er kravd'
+    DEFAULTERRORPAGETITLE: 'Síðan var ikki funnin'

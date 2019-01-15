@@ -1,0 +1,9 @@
+---
+Name: silverstripe-fail-whale
+---
+SilverStripe\Control\Controller:
+  extensions:
+    - Bigfork\SilverStripeFailWhale\Extensions\ControllerExtension
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Bigfork\SilverStripeFailWhale\Extensions\SiteConfigExtension

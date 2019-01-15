@@ -1,0 +1,5 @@
+vi_VN:
+  Bigfork\SilverStripeFailWhale\ErrorDocument:
+    CODE: 'Mã lỗi'
+    DEFAULTERRORPAGECONTENT: '<p>Bạn truy cập vào một trang không tồn tại</p><p>Xin vui lòng kiểm tra lại đường dẩn hoặc quay lại trang chủ</p>'
+    DEFAULTERRORPAGETITLE: 'Không tìm thấy'
