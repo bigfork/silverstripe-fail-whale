@@ -315,11 +315,14 @@ class ErrorDocument extends DataObject
      */
     public static function response_for($errorCode)
     {
+        $content = null;
         try {
             // Try to fetch document dynamically first
             /** @var self $document */
             $document = self::get()->filter(['ErrorCode' => $errorCode])->first();
-            $content = $document->render()->forTemplate();
+            if ($document) {
+                $content = $document->render()->forTemplate();
+            }
         } catch (\Exception $e) {
             // Fall back to static HTML copy
             $content = self::get_content_for_errorcode($errorCode);
@@ -332,7 +335,7 @@ class ErrorDocument extends DataObject
             return $response;
         }
 
-        return null;
+        return $content;
     }
 
     /**
