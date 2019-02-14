@@ -5,6 +5,7 @@ namespace Bigfork\SilverStripeFailWhale\Model;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Storage\GeneratedAssetHandler;
 use SilverStripe\CMS\Controllers\ModelAsController;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\DropdownField;
@@ -311,9 +312,10 @@ class ErrorDocument extends DataObject
 
     /**
      * @param int $errorCode
+     * @param HTTPRequest $request
      * @return HTTPResponse|null
      */
-    public static function response_for($errorCode)
+    public static function response_for($errorCode, HTTPRequest $request = null)
     {
         $content = null;
         try {
@@ -321,7 +323,7 @@ class ErrorDocument extends DataObject
             /** @var self $document */
             $document = self::get()->filter(['ErrorCode' => $errorCode])->first();
             if ($document) {
-                $content = $document->render()->forTemplate();
+                $content = $document->render($request)->forTemplate();
             }
         } catch (\Exception $e) {
             // Fall back to static HTML copy
@@ -339,9 +341,10 @@ class ErrorDocument extends DataObject
     }
 
     /**
+     * @param HTTPRequest $request
      * @return \SilverStripe\ORM\FieldType\DBHTMLText
      */
-    public function render()
+    public function render(HTTPRequest $request = null)
     {
         $templatesFound = [];
         $templatesFound[] = SSViewer::get_templates_by_class(static::class, "_{$this->ErrorCode}", self::class);
@@ -352,6 +355,9 @@ class ErrorDocument extends DataObject
             $page->ID = -1;
             $page->ClassName = self::class;
             $controller = ModelAsController::controller_for($page);
+            if ($request) {
+                $controller->setRequest($request);
+            }
             $controller->doInit();
             $templatesFound[] = $page->getViewerTemplates();
 

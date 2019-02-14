@@ -20,7 +20,7 @@ class ControllerExtension extends Extension
             return;
         }
 
-        $response = ErrorDocument::response_for($statusCode);
+        $response = ErrorDocument::response_for($statusCode, $request);
         if ($response) {
             throw new HTTPResponse_Exception($response);
         }
