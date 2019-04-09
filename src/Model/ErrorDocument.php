@@ -287,7 +287,11 @@ class ErrorDocument extends DataObject
             $response = Member::actAs(null, function () {
                 return self::response_for($this->ErrorCode);
             });
-            $errorContent = $response->getBody();
+
+            $errorContent = null;
+            if ($response) {
+                $errorContent = $response->getBody();
+            }
         } finally {
             // Restore themes
             SSViewer::set_themes($originalThemes);
@@ -337,7 +341,7 @@ class ErrorDocument extends DataObject
             return $response;
         }
 
-        return $content;
+        return $content ?: null;
     }
 
     /**
