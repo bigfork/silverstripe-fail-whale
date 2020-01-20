@@ -117,6 +117,11 @@ class ErrorDocument extends DataObject
         parent::onAfterWrite();
     }
 
+    protected function onAfterSkippedWrite()
+    {
+        $this->writeStaticContent();
+    }
+
     /**
      * @throws ValidationException
      */
