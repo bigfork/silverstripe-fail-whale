@@ -7,6 +7,8 @@ use SilverStripe\Assets\Storage\GeneratedAssetHandler;
 use SilverStripe\CMS\Controllers\ModelAsController;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
+use SilverStripe\Control\NullHTTPRequest;
+use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
@@ -359,9 +361,13 @@ class ErrorDocument extends DataObject
             $page->ID = -1;
             $page->ClassName = self::class;
             $controller = ModelAsController::controller_for($page);
-            if ($request) {
-                $controller->setRequest($request);
+            // If we don't have a request to work with, mock one. This avoids $this->getRequest()->getSession()
+            // related errors from PageController
+            if (!$request) {
+                $request = NullHTTPRequest::create();
+                $request->setSession(Session::create([]));
             }
+            $controller->setRequest($request);
             $controller->doInit();
             $templatesFound[] = $page->getViewerTemplates();
 
