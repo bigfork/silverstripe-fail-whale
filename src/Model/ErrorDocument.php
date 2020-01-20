@@ -364,8 +364,8 @@ class ErrorDocument extends DataObject
             // If we don't have a request to work with, mock one. This avoids $this->getRequest()->getSession()
             // related errors from PageController
             if (!$request) {
-                $request = NullHTTPRequest::create();
-                $request->setSession(Session::create([]));
+                $request = new NullHTTPRequest();
+                $request->setSession(new Session([]));
             }
             $controller->setRequest($request);
             $controller->doInit();
