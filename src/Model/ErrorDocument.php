@@ -375,9 +375,14 @@ class ErrorDocument extends DataObject
             $controller->setRequest($request);
             $controller->doInit();
             $templatesFound[] = $page->getViewerTemplates();
+            
+            // Fallback to framework template in case no themes defined (prevent template-not-found warning)
+            $templatesFound[] = [ Controller::class ];
 
             return $controller->renderWith(array_merge(...$templatesFound), $this);
         }
+        
+        $templatesFound[] = [ Controller::class ];
 
         return $this->renderWith(array_merge(...$templatesFound));
     }
