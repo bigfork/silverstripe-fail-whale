@@ -2,6 +2,8 @@
 
 namespace Bigfork\SilverStripeFailWhale\Model;
 
+use Page;
+use PageController;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Storage\GeneratedAssetHandler;
 use SilverStripe\CMS\Controllers\ModelAsController;
@@ -41,6 +43,10 @@ class ErrorDocument extends DataObject
         'ErrorCode',
         'Title'
     ];
+
+    private static $controller_class = PageController::class;
+
+    private static $page_class = Page::class;
 
     /**
      * Whether error documents should be cached to a static file
@@ -362,8 +368,9 @@ class ErrorDocument extends DataObject
         $templatesFound[] = SSViewer::get_templates_by_class(static::class, "_{$this->ErrorCode}", self::class);
         $templatesFound[] = SSViewer::get_templates_by_class(static::class, '', self::class);
 
-        if (class_exists(\PageController::class)) {
-            $page = \Page::create();
+        if (class_exists($this->config()->get('controller_class'))) {
+            /** @var Page $page */
+            $page = Injector::inst()->create($this->config()->get('page_class'));
             $page->ID = -1;
             $page->ClassName = self::class;
             $controller = ModelAsController::controller_for($page);
