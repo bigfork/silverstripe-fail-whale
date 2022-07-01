@@ -5,6 +5,7 @@ namespace Bigfork\SilverStripeFailWhale\Model;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Storage\GeneratedAssetHandler;
 use SilverStripe\CMS\Controllers\ModelAsController;
+use SilverStripe\Control\Controller;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\NullHTTPRequest;
@@ -375,13 +376,13 @@ class ErrorDocument extends DataObject
             $controller->setRequest($request);
             $controller->doInit();
             $templatesFound[] = $page->getViewerTemplates();
-            
+
             // Fallback to framework template in case no themes defined (prevent template-not-found warning)
             $templatesFound[] = [ Controller::class ];
 
             return $controller->renderWith(array_merge(...$templatesFound), $this);
         }
-        
+
         $templatesFound[] = [ Controller::class ];
 
         return $this->renderWith(array_merge(...$templatesFound));
