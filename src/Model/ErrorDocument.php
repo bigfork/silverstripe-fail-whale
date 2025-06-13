@@ -15,11 +15,14 @@ use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HiddenField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\Security\Member;
 use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Subsites\Model\Subsite;
+use SilverStripe\Subsites\State\SubsiteState;
 use SilverStripe\View\Requirements;
 use SilverStripe\View\SSViewer;
 
@@ -55,6 +58,15 @@ class ErrorDocument extends DataObject
      * @var bool
      */
     private static $enable_static_file = true;
+
+    /**
+     * Whether to show different errordocuments for each Subsite.
+     * If this is enabled, you'll also need to add a has_one Subsite via an extension
+     *
+     * @config
+     * @var bool
+     */
+    private static $enable_subsites = false;
 
     /**
      * Prefix for storing error files in the {@see GeneratedAssetHandler} store.
@@ -95,6 +107,13 @@ class ErrorDocument extends DataObject
     public function getCMSFields()
     {
         $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            if (class_exists(Subsite::class) && static::config()->get('enable_subsites')) {
+                $fields->replaceField(
+                    'SubsiteID',
+                    HiddenField::create('SubsiteID', 'SubsiteID', SubsiteState::singleton()->getSubsiteId()),
+                );
+            }
+
             $fields->replaceField(
                 'ErrorCode',
                 DropdownField::create(
@@ -143,7 +162,13 @@ class ErrorDocument extends DataObject
 
         $defaultPages = $this->getDefaultRecords();
         foreach ($defaultPages as $defaultData) {
-            $this->requireDefaultRecordFixture($defaultData);
+            if (class_exists(Subsite::class) && static::config()->get('enable_subsites')) {
+                foreach (Subsite::get() as $subsite) {
+                    $this->requireDefaultRecordFixture([...$defaultData, 'SubsiteID' => $subsite->ID]);
+                }
+            } else {
+                $this->requireDefaultRecordFixture($defaultData);
+            }
         }
     }
 
@@ -338,8 +363,12 @@ class ErrorDocument extends DataObject
         $content = null;
         try {
             // Try to fetch document dynamically first
+            $candidates = self::get()->filter(['ErrorCode' => $errorCode]);
+            if (class_exists(Subsite::class) && static::config()->get('enable_subsites')) {
+                $candidates = $candidates->filter(['SubsiteID' => SubsiteState::singleton()->getSubsiteId()]);
+            }
             /** @var self $document */
-            $document = self::get()->filter(['ErrorCode' => $errorCode])->first();
+            $document = $candidates->first();
             if ($document) {
                 $content = $document->render($request)->forTemplate();
             }
@@ -384,15 +413,27 @@ class ErrorDocument extends DataObject
             $controller->doInit();
             $templatesFound[] = $page->getViewerTemplates();
 
-            // Fallback to framework template in case no themes defined (prevent template-not-found warning)
-            $templatesFound[] = [ Controller::class ];
-
-            return $controller->renderWith(array_merge(...$templatesFound), $this);
+            $render = function (array $templates) use ($controller) {
+                return $controller->renderWith(array_merge(...$templates), $this);
+            };
+        } else {
+            $render = function (array $templates) {
+                return $this->renderWith(array_merge(...$templates));
+            };
         }
 
+        // Fallback to framework template in case no themes defined (prevent template-not-found warning)
         $templatesFound[] = [ Controller::class ];
 
-        return $this->renderWith(array_merge(...$templatesFound));
+        // If subsites is enabled, render with the correct "current" subsite
+        if (class_exists(Subsite::class) && static::config()->get('enable_subsites')) {
+            return SubsiteState::singleton()->withState(function (SubsiteState $state) use ($render, $templatesFound) {
+                $state->setSubsiteId($this->SubsiteID);
+                return $render($templatesFound);
+            });
+        }
+
+        return $render($templatesFound);
     }
 
     /**
@@ -431,8 +472,15 @@ class ErrorDocument extends DataObject
             $instance = self::singleton();
         }
 
-        // Allow modules to extend this filename (e.g. for multi-domain, translatable)
-        $name = "error-{$statusCode}.html";
+        $slug = $statusCode;
+        if (class_exists(Subsite::class) && static::config()->get('enable_subsites')) {
+            $subsiteID = SubsiteState::singleton()->getSubsiteId();
+            if ($subsiteID) {
+                $slug .= '-' . $subsiteID;
+            }
+        }
+
+        $name = "error-{$slug}.html";
         $instance->extend('updateErrorFilename', $name, $statusCode);
 
         return $name;

@@ -24,10 +24,20 @@ As an example, in the event of a 404 error this module will look for the followi
 
 If none of the above templates are present and you have the CMS module installed, the module will fall back to using the default `Page` templates.
 
+## Subsites
+By default all the subsites will use the main site’s error documents. If you want each site to have its own error pages, this should get you cooking:
+
+```yml
+Bigfork\SilverStripeFailWhale\Model\ErrorDocument:
+  enable_subsites: true
+  has_one:
+    Subsite: SilverStripe\Subsites\Model\Subsite
+```
+
 ## What’s with the name?
 
 > The “Fail Whale” is an illustration of a white beluga whale held up by a flock of birds, originally named <a title="The Origin of Twitter's &quot;Fail Whale&quot; - Mashable" href="http://mashable.com/2010/08/01/fail-whale-designer-interview/" target="_blank"><em>“Lifting a Dreamer”</em></a>, illustrated by Australian artist <a title="YIYING LU on Twitter" href="http://twitter.com/yiyinglu" target="_blank">Yiying Lu</a>. It was used during periods of downtime by the social networking service Twitter.
-> 
+>
 > &ndash; http://www.whatisfailwhale.info/
 
 h/t to <a href="https://github.com/andrewandante">@andrewandante</a> for the suggestion!
