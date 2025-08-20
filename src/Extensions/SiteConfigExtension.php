@@ -12,7 +12,7 @@ use SilverStripe\Subsites\State\SubsiteState;
 
 class SiteConfigExtension extends Extension
 {
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): void
     {
         $fields->addFieldToTab(
             'Root.ErrorDocuments',

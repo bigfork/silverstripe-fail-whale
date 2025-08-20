@@ -13,12 +13,13 @@ use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\NullHTTPRequest;
 use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Core\Validation\ValidationException;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
-use SilverStripe\ORM\ValidationException;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\Security\Member;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Subsites\Model\Subsite;
@@ -28,28 +29,28 @@ use SilverStripe\View\SSViewer;
 
 class ErrorDocument extends DataObject
 {
-    private static $table_name = 'ErrorDocument';
+    private static string $table_name = 'ErrorDocument';
 
-    private static $db = [
+    private static array $db = [
         'ErrorCode' => 'Int',
         'Title' => 'Varchar(255)',
-        'Content' => 'HTMLText'
+        'Content' => 'HTMLText',
     ];
 
-    private static $indexes = [
-        'ErrorCode' => true
+    private static array $indexes = [
+        'ErrorCode' => true,
     ];
 
-    private static $default_sort = 'ErrorCode ASC';
+    private static string $default_sort = 'ErrorCode ASC';
 
-    private static $summary_fields = [
+    private static array $summary_fields = [
         'ErrorCode',
-        'Title'
+        'Title',
     ];
 
-    private static $controller_class = PageController::class;
+    private static string $controller_class = PageController::class;
 
-    private static $page_class = Page::class;
+    private static string $page_class = Page::class;
 
     /**
      * Whether error documents should be cached to a static file
@@ -57,7 +58,7 @@ class ErrorDocument extends DataObject
      * @config
      * @var bool
      */
-    private static $enable_static_file = true;
+    private static bool $enable_static_file = true;
 
     /**
      * Whether to show different errordocuments for each Subsite.
@@ -66,7 +67,7 @@ class ErrorDocument extends DataObject
      * @config
      * @var bool
      */
-    private static $enable_subsites = false;
+    private static bool $enable_subsites = false;
 
     /**
      * Prefix for storing error files in the {@see GeneratedAssetHandler} store.
@@ -75,27 +76,27 @@ class ErrorDocument extends DataObject
      * @config
      * @var string
      */
-    private static $store_filepath = null;
+    private static ?string $store_filepath = null;
 
-    public function canCreate($member = null, $context = [])
+    public function canCreate($member = null, $context = []): bool
     {
         $config = SiteConfig::current_site_config();
         return $config->canEdit($member);
     }
 
-    public function canView($member = null)
+    public function canView($member = null): bool
     {
         $config = SiteConfig::current_site_config();
         return $config->canView($member);
     }
 
-    public function canEdit($member = null)
+    public function canEdit($member = null): bool
     {
         $config = SiteConfig::current_site_config();
         return $config->canEdit($member);
     }
 
-    public function canDelete($member = null)
+    public function canDelete($member = null): bool
     {
         $config = SiteConfig::current_site_config();
         return $config->canEdit($member);
@@ -104,7 +105,7 @@ class ErrorDocument extends DataObject
     /**
      * @return FieldList
      */
-    public function getCMSFields()
+    public function getCMSFields(): FieldList
     {
         $this->beforeUpdateCMSFields(function (FieldList $fields) {
             if (class_exists(Subsite::class) && static::config()->get('enable_subsites')) {
@@ -127,7 +128,7 @@ class ErrorDocument extends DataObject
         return parent::getCMSFields();
     }
 
-    public function fieldLabels($includerelations = true)
+    public function fieldLabels($includerelations = true): array
     {
         $labels = parent::fieldLabels($includerelations);
 
@@ -137,13 +138,13 @@ class ErrorDocument extends DataObject
         return $labels;
     }
 
-    protected function onAfterWrite()
+    protected function onAfterWrite(): void
     {
         $this->writeStaticContent();
         parent::onAfterWrite();
     }
 
-    protected function onAfterSkippedWrite()
+    protected function onAfterSkippedWrite(): void
     {
         $this->writeStaticContent();
     }
@@ -151,7 +152,7 @@ class ErrorDocument extends DataObject
     /**
      * @throws ValidationException
      */
-    public function requireDefaultRecords()
+    public function requireDefaultRecords(): void
     {
         parent::requireDefaultRecords();
 
@@ -175,7 +176,7 @@ class ErrorDocument extends DataObject
     /**
      * @return array
      */
-    protected function getDefaultRecords()
+    protected function getDefaultRecords(): array
     {
         $data = [
             [
@@ -210,9 +211,9 @@ class ErrorDocument extends DataObject
 
     /**
      * @param array $defaultData
-     * @throws \SilverStripe\ORM\ValidationException
+     * @throws ValidationException
      */
-    protected function requireDefaultRecordFixture(array $defaultData)
+    protected function requireDefaultRecordFixture(array $defaultData): void
     {
         $code = $defaultData['ErrorCode'];
         $documentExists = true;
@@ -254,7 +255,7 @@ class ErrorDocument extends DataObject
     /**
      * @return array
      */
-    protected function getCodes()
+    protected function getCodes(): array
     {
         return [
             400 => _t('Bigfork\\SilverStripeFailWhale\\ErrorDocument.CODE_400', '400 - Bad Request'),
@@ -290,7 +291,7 @@ class ErrorDocument extends DataObject
      *
      * @return bool
      */
-    protected function hasStaticContent()
+    protected function hasStaticContent(): bool
     {
         if (!self::config()->enable_static_file) {
             return false;
@@ -308,7 +309,7 @@ class ErrorDocument extends DataObject
      *
      * @return boolean - true if the document write was successful
      */
-    protected function writeStaticContent()
+    protected function writeStaticContent(): bool
     {
         if (!self::config()->enable_static_file) {
             return false;
@@ -353,12 +354,7 @@ class ErrorDocument extends DataObject
         return true;
     }
 
-    /**
-     * @param int $errorCode
-     * @param HTTPRequest $request
-     * @return HTTPResponse|null
-     */
-    public static function response_for($errorCode, HTTPRequest $request = null)
+    public static function response_for(int $errorCode, HTTPRequest $request = null): HTTPResponse|string|null
     {
         $content = null;
         try {
@@ -387,11 +383,7 @@ class ErrorDocument extends DataObject
         return $content ?: null;
     }
 
-    /**
-     * @param HTTPRequest $request
-     * @return \SilverStripe\ORM\FieldType\DBHTMLText
-     */
-    public function render(HTTPRequest $request = null)
+    public function render(HTTPRequest $request = null): DBHTMLText
     {
         $templatesFound = [];
         $templatesFound[] = SSViewer::get_templates_by_class(static::class, "_{$this->ErrorCode}", self::class);
@@ -438,11 +430,8 @@ class ErrorDocument extends DataObject
 
     /**
      * Returns statically cached content for a given error code
-     *
-     * @param int $statusCode
-     * @return string|null
      */
-    public static function get_content_for_errorcode($statusCode)
+    public static function get_content_for_errorcode(int $statusCode): ?string
     {
         if (!self::config()->enable_static_file) {
             return null;
@@ -461,12 +450,8 @@ class ErrorDocument extends DataObject
     /**
      * Gets the filename identifier for the given error code.
      * Used when handling responses under error conditions.
-     *
-     * @param int $statusCode A HTTP Statuscode, typically 404 or 500
-     * @param ErrorDocument $instance Optional instance to use for name generation
-     * @return string
      */
-    protected static function get_error_filename($statusCode, ErrorDocument $instance = null)
+    protected static function get_error_filename(int $statusCode, ErrorDocument $instance = null): string
     {
         if (!$instance) {
             $instance = self::singleton();
@@ -489,18 +474,13 @@ class ErrorDocument extends DataObject
     /**
      * Get filename identifier for this record.
      * Used for generating the filename for the current record.
-     *
-     * @return string
      */
-    protected function getErrorFilename()
+    protected function getErrorFilename(): string
     {
         return self::get_error_filename($this->ErrorCode, $this);
     }
 
-    /**
-     * @return GeneratedAssetHandler
-     */
-    protected static function get_asset_handler()
+    protected static function get_asset_handler(): GeneratedAssetHandler
     {
         return Injector::inst()->get(GeneratedAssetHandler::class);
     }

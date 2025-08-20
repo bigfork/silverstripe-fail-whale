@@ -14,7 +14,7 @@ class ControllerExtension extends Extension
      * @param HTTPRequest $request
      * @throws HTTPResponse_Exception
      */
-    public function onBeforeHTTPError($statusCode, HTTPRequest $request)
+    public function onBeforeHTTPError($statusCode, HTTPRequest $request): void
     {
         if ($request->isAjax()) {
             return;

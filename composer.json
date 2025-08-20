@@ -11,8 +11,8 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "^5",
-        "silverstripe/siteconfig": "^5"
+        "silverstripe/framework": "^6",
+        "silverstripe/siteconfig": "^6"
     },
     "autoload": {
         "psr-4": {
@@ -20,7 +20,7 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^11"
     },
     "autoload-dev": {
         "psr-4": {
