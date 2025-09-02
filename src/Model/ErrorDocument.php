@@ -451,7 +451,7 @@ class ErrorDocument extends DataObject
      * Gets the filename identifier for the given error code.
      * Used when handling responses under error conditions.
      */
-    protected static function get_error_filename(int $statusCode, ErrorDocument $instance = null): string
+    protected static function get_error_filename(int $statusCode, ?ErrorDocument $instance = null): string
     {
         if (!$instance) {
             $instance = self::singleton();
