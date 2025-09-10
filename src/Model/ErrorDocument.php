@@ -354,7 +354,7 @@ class ErrorDocument extends DataObject
         return true;
     }
 
-    public static function response_for(int $errorCode, HTTPRequest $request = null): HTTPResponse|string|null
+    public static function response_for(int $errorCode, ?HTTPRequest $request = null): HTTPResponse|string|null
     {
         $content = null;
         try {
@@ -383,7 +383,7 @@ class ErrorDocument extends DataObject
         return $content ?: null;
     }
 
-    public function render(HTTPRequest $request = null): DBHTMLText
+    public function render(?HTTPRequest $request = null): DBHTMLText
     {
         $templatesFound = [];
         $templatesFound[] = SSViewer::get_templates_by_class(static::class, "_{$this->ErrorCode}", self::class);
